@@ -5,11 +5,11 @@ function App() {
   const [name, setName] = useState("");
   const API_URL = process.env.REACT_APP_API_URL;
 
-  const fetchUsers = async () => {
-    const res = await fetch(`${API_URL}/api/users`);
-    const data = await res.json();
-    setUsers(data);
-  };
+  // const fetchUsers = async () => {
+  //   const res = await fetch(`${API_URL}/api/users`);
+  //   const data = await res.json();
+  //   setUsers(data);
+  // };
 
   const addUser = async () => {
     if (!name) return alert("Name required");
@@ -24,7 +24,16 @@ function App() {
     setName("");
   };
 
+  // useEffect(() => {
+  //   fetchUsers();
+  // }, []);
   useEffect(() => {
+    const fetchUsers = async () => {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`);
+      const data = await res.json();
+      setUsers(data);
+    };
+
     fetchUsers();
   }, []);
 
